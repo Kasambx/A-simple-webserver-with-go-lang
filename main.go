@@ -1,45 +1,22 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+    "net/http"
+    "html/template"
 )
 
-func forwardHandler(w http.ResponseWriter, r *"http.Request"){
-	if err := r.ParseForm(); err != nil(
-		fmt.Fprintf(w, "ParseForm() err: %v", err)
-		return
-	)
-	fmt.fprintf(w, "POST request successful")
-	name :- r.FormValue("name")
-	addredd := r.FormValue("addreds")
-	fmt.Fprintf(w, "Name = %s/n", name)
-	fmt.Fprintf(w, "Address = %s/n", address)
-}
+func main() {
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        t, err := template.ParseFiles("index.html")
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+            return
+        }
+        t.Execute(w, nil)
+    })
 
-func helloHandler(w http.ResponseWriter,r *http.Request){
-if r..URL.Path != "/hello"{
-	http.Error(w, "404 not found", http.StatusNotFound)
-	return
-}
-if r.Method != "GET"{
-	http.Error(w, "method is not supported", http.StatusNotFound)
-	return 
-}
-fmt.Fprintf(w,"hello!")
-}
+    fs := http.FileServer(http.Dir("static"))
+    http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-
-
-func main(){
-	fileServer := http.Fileserver(http.Dir("./static"))
-	http.Handle("/", fileServer)
-	http.HandleFunc("/form", formHandler)
-	http.HandleFunc("/hello",helloHandler)
-
-	fmt.Printf("Starting a new server at port 8080\n")
-	if err := http.ListenAndServe("8080",nil); err != nill{
-		log.Fatal(err)
-	}
+    http.ListenAndServe(":8080", nil)
 }
