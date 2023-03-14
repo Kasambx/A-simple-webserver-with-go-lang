@@ -36,7 +36,7 @@ This command will create a Kubernetes deployment with the specified number of re
 **Exposing the Deployment as a Service**  
 To expose the Kubernetes deployment as a service, run the following command:  
 
-Copy code
+Copy code  
 `kubectl apply -f your-service.yaml`
 This command will create a Kubernetes service with a load balancer that listens on port 80 and forwards traffic to port 8080 in the container.
 
