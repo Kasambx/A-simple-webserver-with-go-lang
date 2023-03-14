@@ -21,23 +21,23 @@ This command will build a Docker image using the Dockerfile in the current direc
 **Pushing the Container Image to a Registry**  
 To push the container image to a registry such as Docker Hub, run the following command:
 
-bash
-Copy code
-docker push your-username/your-image-name:your-image-tag
+bash  
+Copy code  
+"docker push your-username/your-image-name:your-image-tag"
 Make sure to replace your-username, your-image-name, and your-image-tag with your desired values.
 
 **Deploying the Container on Kubernetes**  
 To deploy the container on Kubernetes, run the following command:  
 
-Copy code
-kubectl apply -f your-deployment.yaml  
+Copy code  
+"kubectl apply -f your-deployment.yaml  "
 This command will create a Kubernetes deployment with the specified number of replicas.
 
 **Exposing the Deployment as a Service**  
 To expose the Kubernetes deployment as a service, run the following command:  
 
 Copy code
-kubectl apply -f your-service.yaml
+"kubectl apply -f your-service.yaml"
 This command will create a Kubernetes service with a load balancer that listens on port 80 and forwards traffic to port 8080 in the container.
 
 **License**  
