@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebserver-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mywebserver
+  template:
+    metadata:
+      labels:
+        app: mywebserver
+    spec:
+      containers:
+      - name: mywebserver
+        image: mywebserver:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: static-files
+          mountPath: /app/static
+      volumes:
+      - name: static-files
+        configMap:
+          name: mywebserver-static
+
